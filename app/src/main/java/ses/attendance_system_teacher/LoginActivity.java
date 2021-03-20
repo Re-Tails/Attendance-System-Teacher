@@ -26,21 +26,11 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_login;
     FirebaseAuth auth;
     TextView tv_forgotPassword;
-    FirebaseUser firebaseUser;
 
-
-    //if already logged in
     @Override
     protected void onStart() {
         super.onStart();
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            startActivity(new Intent(LoginActivity.this, null));
-            finish();
-        }
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
