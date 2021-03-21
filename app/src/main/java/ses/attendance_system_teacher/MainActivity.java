@@ -12,21 +12,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
-    FirebaseUser firebaseUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //if logged in
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            startActivity(new Intent(MainActivity.this, null));
-        }
-        else {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        }
-        finish();
-        //setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
     }
 }

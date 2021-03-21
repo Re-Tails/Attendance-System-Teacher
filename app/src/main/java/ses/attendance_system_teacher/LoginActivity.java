@@ -26,11 +26,25 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_login;
     FirebaseAuth auth;
     TextView tv_forgotPassword;
+    FirebaseUser firebaseUser;
 
+    //auto login
     @Override
     protected void onStart() {
         super.onStart();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
+/*
+    @Override
+    protected void onStart() {
+        super.onStart();
+   }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Intent intent = new Intent(LoginActivity.this, null);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class   );
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
