@@ -32,6 +32,14 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
 
@@ -39,17 +47,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-    }
-/*
-    @Override
-    protected void onStart() {
-        super.onStart();
-   }*/
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
         et_email = findViewById(R.id.email);
         et_password = findViewById(R.id.password);
