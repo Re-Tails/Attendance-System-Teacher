@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView tv_forgotPassword;
     FirebaseUser firebaseUser;
 
-    //auto login
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -38,27 +38,26 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
+        //auto login
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
-
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(LoginActivity.this, SubjectsListActivity.class));
             finish();
         }
 
-        et_email = findViewById(R.id.email);
+        setContentView(R.layout.activity_login);
+        et_email = findViewById(R.id.et_location);
         et_password = findViewById(R.id.password);
         btn_login = findViewById(R.id.btn_login);
-        tv_forgotPassword = findViewById(R.id.forgot_password);
+        tv_forgotPassword = findViewById(R.id.tv_forgot_password);
         auth = FirebaseAuth.getInstance();
 
         // move to ResetPasswordActivity
         tv_forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(  new Intent(LoginActivity.this, ResetPasswordActivity.class));
+                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
             }
         });
 
@@ -81,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class   );
+                                Intent intent = new Intent(LoginActivity.this, SubjectsListActivity.class   );
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();

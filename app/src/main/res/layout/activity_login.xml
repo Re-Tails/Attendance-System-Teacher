@@ -9,7 +9,6 @@
 
 
     <androidx.appcompat.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,15 +24,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Log In"
+            android:text="@string/log_in"
             android:textSize="20sp"
             android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/et_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
+        android:hint="@string/email"
         android:inputType="textEmailAddress" />
 
     <!--    app:met_floatingLabel="normal"-->
@@ -62,26 +63,28 @@
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
+        android:hint="@string/password"
         android:inputType="textPassword" />
 
     <Button
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/purple_500"
-            android:text="login"
-            android:textColor="#fff" />
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/purple_500"
+        android:text="@string/submit"
+        android:textColor="#fff" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Forgot Your Password ?"
+            android:text="@string/forgot_your_password"
             android:layout_marginTop="10dp"
             android:textStyle="bold"
-            android:id="@+id/forgot_password"
+            android:id="@+id/tv_forgot_password"
             />
 
         </LinearLayout>
