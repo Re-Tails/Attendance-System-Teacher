@@ -9,10 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AttendanceSystemTeacher">
-        <activity
-            android:name=".SubjectsListActivity"
-            android:label="@string/title_activity_sessions_list"
-            android:theme="@style/Theme.AttendanceSystemTeacher.NoActionBar"></activity>
+
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +19,8 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".SubjectsListActivity"></activity>
+        <activity android:name=".AddSessionActivity"></activity>
     </application>
 
 </manifest>
