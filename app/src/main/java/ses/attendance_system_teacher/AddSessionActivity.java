@@ -23,8 +23,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -92,13 +95,25 @@ public class AddSessionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 session = new Session();
-
                 session.setSession_date(et_date.getText().toString());
                 session.setSession_location(et_location.getText().toString());
                 session.setSession_start_time(et_start_time.getText().toString());
                 session.setSession_end_time(et_end_time.getText().toString());
                 session.setSession_subject(et_subject.getText().toString());
                 databaseReference.push().setValue(session);
+
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Toast.makeText(AddSessionActivity.this, "Session added", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(AddSessionActivity.this, "Failed to add session " + error, Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
