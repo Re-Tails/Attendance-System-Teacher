@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         //auto login
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
-            startActivity(new Intent(LoginActivity.this, SubjectsListActivity.class));
+            startActivity(new Intent(LoginActivity.this, SessionListActivity.class));
             finish();
         }
 
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Intent intent = new Intent(LoginActivity.this, SubjectsListActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, SessionListActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();

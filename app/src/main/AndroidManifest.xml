@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".SubjectsListActivity"></activity>
+        <activity android:name=".SessionListActivity"></activity>
         <activity android:name=".AddSessionActivity"></activity>
     </application>
 
