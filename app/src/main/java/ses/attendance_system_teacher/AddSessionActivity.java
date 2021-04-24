@@ -1,10 +1,8 @@
 package ses.attendance_system_teacher;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -18,25 +16,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import ses.attendance_system_teacher.model.Session;
 
 public class AddSessionActivity extends AppCompatActivity {
-    DatabaseReference databaseReference;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference sessionDatabaseReference;
+    DatabaseReference subjectDatabaseReference;
     EditText et_location;
     EditText et_date;
     EditText et_start_time;
@@ -45,6 +40,7 @@ public class AddSessionActivity extends AppCompatActivity {
     AutoCompleteTextView et_subject;
     TextInputLayout til_subject;
     Session session;
+    ArrayList<String> subjects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +56,21 @@ public class AddSessionActivity extends AppCompatActivity {
         btn_submit = findViewById(R.id.btn_submit);
         et_subject = findViewById(R.id.tv_subject);
         til_subject = findViewById(R.id.til_subject);
-        databaseReference = FirebaseDatabase.getInstance().getReference("Session");
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        sessionDatabaseReference = firebaseDatabase.getReference("Session");
+        subjectDatabaseReference = firebaseDatabase.getReference("Subject");
+        subjects = new ArrayList<String>();
+        subjectDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                subjects.add(snapshot.getKey());
+            }
 
-        String subjects[] = {"Option 1", "Option 2", "Option 3", "Option 4"};
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.add_session_subject_list_item, subjects);
         ((AutoCompleteTextView)til_subject.getEditText()).setAdapter(adapter);
         et_subject.setShowSoftInputOnFocus(false);
@@ -100,9 +108,9 @@ public class AddSessionActivity extends AppCompatActivity {
                 session.setSession_start_time(et_start_time.getText().toString());
                 session.setSession_end_time(et_end_time.getText().toString());
                 session.setSession_subject(et_subject.getText().toString());
-                databaseReference.push().setValue(session);
+                sessionDatabaseReference.push().setValue(session);
 
-                databaseReference.addValueEventListener(new ValueEventListener() {
+                sessionDatabaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Toast.makeText(AddSessionActivity.this, "Session added", Toast.LENGTH_SHORT).show();
