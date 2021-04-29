@@ -3,6 +3,7 @@ package ses.attendance_system_teacher;
 import android.app.DatePickerDialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -45,25 +46,24 @@ public class AddSessionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.v("Hello", "hello");
 
-        setContentView(R.layout.activity_add_session);
 
 
-        et_location = findViewById(R.id.et_location);
-        et_date = findViewById(R.id.et_date);
-        et_start_time = findViewById(R.id.et_start_time);
-        et_end_time = findViewById(R.id.et_end_time);
-        btn_submit = findViewById(R.id.btn_submit);
-        et_subject = findViewById(R.id.tv_subject);
-        til_subject = findViewById(R.id.til_subject);
+
+
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         sessionDatabaseReference = firebaseDatabase.getReference("Session");
         subjectDatabaseReference = firebaseDatabase.getReference("Subject");
+        Log.v("Key: ", subjectDatabaseReference.getKey());
         subjects = new ArrayList<String>();
         subjectDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                subjects.add(snapshot.getKey());
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    subjects.add(postSnapshot.getKey());
+                }
             }
 
             @Override
@@ -72,6 +72,16 @@ public class AddSessionActivity extends AppCompatActivity {
             }
         });
         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), R.layout.add_session_subject_list_item, subjects);
+
+        setContentView(R.layout.activity_add_session);
+        til_subject = findViewById(R.id.til_subject);
+        et_location = findViewById(R.id.et_location);
+        et_date = findViewById(R.id.et_date);
+        et_start_time = findViewById(R.id.et_start_time);
+        et_end_time = findViewById(R.id.et_end_time);
+        btn_submit = findViewById(R.id.btn_submit);
+        et_subject = findViewById(R.id.tv_subject);
+        
         ((AutoCompleteTextView)til_subject.getEditText()).setAdapter(adapter);
         et_subject.setShowSoftInputOnFocus(false);
         et_subject.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +134,7 @@ public class AddSessionActivity extends AppCompatActivity {
                 });
             }
         });
+
 
     }
     private void hideSoftKeyBoard() {
