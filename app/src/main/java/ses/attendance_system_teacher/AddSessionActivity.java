@@ -56,7 +56,7 @@ public class AddSessionActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         sessionDatabaseReference = firebaseDatabase.getReference("Session");
         subjectDatabaseReference = firebaseDatabase.getReference("Subject");
-        Log.v("Key: ", subjectDatabaseReference.getKey());
+
         subjects = new ArrayList<String>();
         subjectDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -118,20 +118,34 @@ public class AddSessionActivity extends AppCompatActivity {
                 session.setSession_start_time(et_start_time.getText().toString());
                 session.setSession_end_time(et_end_time.getText().toString());
                 session.setSession_subject(et_subject.getText().toString());
-                sessionDatabaseReference.push().setValue(session);
-
-                sessionDatabaseReference.addValueEventListener(new ValueEventListener() {
+                sessionDatabaseReference.child(et_subject.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Toast.makeText(AddSessionActivity.this, "Session added", Toast.LENGTH_SHORT).show();
-                        finish();
+                        if(!snapshot.exists()) {
+                            sessionDatabaseReference.push().setValue(et_subject.getText().toString());
+                        }
+                        sessionDatabaseReference.child(et_subject.getText().toString()).push().setValue(session);
+                        sessionDatabaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                Toast.makeText(AddSessionActivity.this, "Session added", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Toast.makeText(AddSessionActivity.this, "Failed to add session " + error, Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(AddSessionActivity.this, "Failed to add session " + error, Toast.LENGTH_SHORT).show();
+
                     }
                 });
+
+
             }
         });
 

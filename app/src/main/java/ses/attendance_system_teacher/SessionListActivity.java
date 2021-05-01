@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,14 +34,18 @@ public class SessionListActivity extends AppCompatActivity {
     RecyclerView rv_sessions;
     ArrayList<Session> session_list;
     SessionRCAdapter sessionRCAdapter;
+    FirebaseUser firebaseUser;
     DatabaseReference sessionDatabaseReference;
+    DatabaseReference teacherSubjectsDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sessions_list);
         //toolBarLayout.setTitle(getTitle());
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         sessionDatabaseReference = FirebaseDatabase.getInstance().getReference("Session");
+        teacherSubjectsDatabaseReference = FirebaseDatabase.getInstance().getReference("Teacher").child(firebaseUser.getUid()).child("teacher_subjects");
         btn_add_session = findViewById(R.id.btn_add_session);
         rv_sessions = findViewById(R.id.rv_sessions);
         session_list = new ArrayList<>();
@@ -52,27 +59,40 @@ public class SessionListActivity extends AppCompatActivity {
             }
         });
         sessionRCAdapter = new SessionRCAdapter(session_list);
-        sessionDatabaseReference.addChildEventListener(new ChildEventListener() {
+        teacherSubjectsDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Session session = snapshot.getValue(Session.class);
-                session_list.add(session);
-                sessionRCAdapter.notifyItemInserted(session_list.size());
-                Log.v("Session", "loaded");
-            }
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot subjectSnapshot: snapshot.getChildren()) {
+                    sessionDatabaseReference.child(subjectSnapshot.getKey()).getRef().addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                            Session session = snapshot.getValue(Session.class);
+                            session_list.add(session);
+                            sessionRCAdapter.notifyItemInserted(session_list.size());
+                            Log.v("Session", "loaded");
+                        }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-            }
+                        }
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
 
-            }
+                        }
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
 
             }
 
