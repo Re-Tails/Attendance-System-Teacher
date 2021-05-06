@@ -1,5 +1,7 @@
 package ses.attendance_system_teacher;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +30,8 @@ public class SessionRCAdapter extends RecyclerView.Adapter<SessionRCAdapter.View
         public TextView getTextView() {
             return tv_session;
         }
+
+        public View getView() {return itemView;}
     }
 
     public SessionRCAdapter(List sessionList) {
@@ -49,7 +53,23 @@ public class SessionRCAdapter extends RecyclerView.Adapter<SessionRCAdapter.View
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         Log.v("view", "binded");
-        holder.getTextView().setText(sessionList.get(position).getSession_subject());
+        Session session = sessionList.get(position);
+        holder.getTextView().setText(session.getSession_subject());
+        holder.getView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context viewContext = v.getContext();
+                Intent intent = new Intent(viewContext, SessionDetailsActivity.class);
+                intent.putExtra("session_id", session.getSession_id());
+                intent.putExtra("session_location", session.getSession_location());
+                intent.putExtra("session_date", session.getSession_date());
+                intent.putExtra("session_start_time", session.getSession_start_time());
+                intent.putExtra("session_end_time", session.getSession_end_time());
+                intent.putExtra("session_subject", session.getSession_subject());
+                intent.putExtra("session_code", session.getSession_code());
+                viewContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

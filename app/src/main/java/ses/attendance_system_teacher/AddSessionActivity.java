@@ -26,12 +26,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import ses.attendance_system_teacher.model.Session;
 
 public class AddSessionActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference sessionDatabaseReference;
+    DatabaseReference addedSessionDatabaseReference;
     DatabaseReference subjectDatabaseReference;
     EditText et_location;
     EditText et_date;
@@ -118,13 +120,17 @@ public class AddSessionActivity extends AppCompatActivity {
                 session.setSession_start_time(et_start_time.getText().toString());
                 session.setSession_end_time(et_end_time.getText().toString());
                 session.setSession_subject(et_subject.getText().toString());
+                session.setSession_code(getRandomSixDigit());
                 sessionDatabaseReference.child(et_subject.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(!snapshot.exists()) {
                             sessionDatabaseReference.push().setValue(et_subject.getText().toString());
                         }
-                        sessionDatabaseReference.child(et_subject.getText().toString()).push().setValue(session);
+
+                        addedSessionDatabaseReference = sessionDatabaseReference.child(et_subject.getText().toString()).push();
+                        session.setSession_id(addedSessionDatabaseReference.getKey());
+                        addedSessionDatabaseReference.setValue(session);
                         sessionDatabaseReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -157,5 +163,14 @@ public class AddSessionActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
+    private String getRandomSixDigit() {
+        // It will generate 6 digit random Number.
+        // from 0 to 999999
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+        // this will convert any number sequence into 6 character.
+        return String.format("%06d", number);
+    }
+
 
 }
