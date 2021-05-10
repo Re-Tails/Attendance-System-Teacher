@@ -28,12 +28,12 @@ public class LoginActivity extends AppCompatActivity {
     TextView tv_forgotPassword;
     FirebaseUser firebaseUser;
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-    }
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,12 +75,12 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "All Fields are Required", Toast.LENGTH_SHORT).show();
                 } else {
 
-
+//                    lamtienlong9@gmail.com
                     auth.signInWithEmailAndPassword(txt_email, txt_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Intent intent = new Intent(LoginActivity.this, SessionListActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, FacialRecActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
