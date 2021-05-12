@@ -24,6 +24,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -106,7 +109,12 @@ public class AddSessionActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                et_date.setText(dayOfMonth + "/" + month + "/" + year);
+                int fixedMonth = month + 1;
+                DateTimeFormatter currentFormatter = DateTimeFormatter.ofPattern("d/M/uuuu");
+                DateTimeFormatter convertedOutputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String currentDate = dayOfMonth + "/" + fixedMonth + "/" + year;
+                LocalDate localDate = LocalDate.parse(currentDate, currentFormatter);
+                et_date.setText(localDate.format(convertedOutputFormatter));
             }
         });
 
