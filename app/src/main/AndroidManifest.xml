@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ses.attendance_system_teacher">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,6 +25,20 @@
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".SessionListActivity" />
         <activity android:name=".AddSessionActivity" />
+        <activity
+            android:name=".FacialRecActivity"
+            android:parentActivityName=".LoginActivity"
+            />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="ses.attendance_system_teacher"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
