@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText et_email;
     EditText et_password;
-    Button btn_login;
+    FrameLayout fl_login;
     FirebaseAuth auth;
     TextView tv_forgotPassword;
     FirebaseUser firebaseUser;
@@ -47,10 +47,10 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_login);
-        et_email = findViewById(R.id.et_location);
+        et_email = findViewById(R.id.email);
         et_password = findViewById(R.id.password);
-        btn_login = findViewById(R.id.btn_login);
-        tv_forgotPassword = findViewById(R.id.tv_forgot_password);
+        fl_login = findViewById(R.id.fl_login);
+        tv_forgotPassword = findViewById(R.id.forgot_password);
         auth = FirebaseAuth.getInstance();
 
         // move to ResetPasswordActivity
@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         //2. check if valid (empty, not email, etc)
         //3. check with firebase authentication
         //4. login if the email and password are correct
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        fl_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String txt_email = et_email.getText().toString();
