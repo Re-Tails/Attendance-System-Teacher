@@ -54,7 +54,9 @@ public class SessionRCAdapter extends RecyclerView.Adapter<SessionRCAdapter.View
         // contents of the view with that element
         Log.v("view", "binded");
         Session session = sessionList.get(position);
-        holder.getTextView().setText(session.getSession_subject());
+        holder.getTextView().setText(session.getSession_subject()
+                                    + " on "
+                                    + session.getSession_date());
         holder.getView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
