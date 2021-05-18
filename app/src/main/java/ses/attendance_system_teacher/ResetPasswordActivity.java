@@ -3,8 +3,11 @@ package ses.attendance_system_teacher;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,16 +20,18 @@ import com.google.firebase.auth.FirebaseAuth;
 public class ResetPasswordActivity extends AppCompatActivity {
     FirebaseAuth auth;
     EditText email;
-    Button reset;
+    FrameLayout reset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_reset_password);
 
 
-        email = findViewById(R.id.et_location);
-        reset = findViewById(R.id.btn_submit);
+        email = findViewById(R.id.email);
+        reset = findViewById(R.id.reset);
         auth = FirebaseAuth.getInstance();
         reset.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -8,24 +8,78 @@
     android:fitsSystemWindows="true"
     tools:context=".SessionListActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_sessions"
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/imghexagon"
+            android:layout_width="140dp"
+            android:layout_height="212dp"
+            android:layout_gravity="right"
+            android:contentDescription=""
+            android:scaleType="fitXY"
+            android:src="@drawable/hexagone1" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="120dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/hexagone2"
+            tools:visibility="visible" />
+
+
+
+
+
+
+    </FrameLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:gravity="center"
+        android:paddingTop="125dp"
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_add_session"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:contentDescription="@string/add_session"
-        app:layout_anchorGravity="bottom|end"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical">
+<!--        android:layout_marginLeft="36dp"-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_sessions"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:layout_marginTop="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_add_session"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="right"
+            android:contentDescription="@string/add_session"
+android:layout_marginTop="10dp"
+android:backgroundTint="@color/white"
+            android:tint="@color/white"
+            android:src="@drawable/ic_input_add"/>
+
+<!--        </com.google.android.material.floatingactionbutton.FloatingActionButton>-->
+<!--        app:layout_anchorGravity="bottom|end"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
