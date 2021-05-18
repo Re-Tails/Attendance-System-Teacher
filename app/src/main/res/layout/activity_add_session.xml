@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"
         android:text="@string/add_session"
-        android:textColor="@android:color/primary_text_light"
+        android:textColor="@android:color/primary_text_dark"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,6 +72,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/select_subject"
+        android:textColorHint="@color/white"
+        app:hintTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/et_location"
         app:layout_constraintStart_toStartOf="@+id/tv_location"
         app:layout_constraintTop_toBottomOf="@+id/et_start_time">
@@ -80,7 +82,12 @@
             android:id="@+id/tv_subject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textShortMessage" />
+            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent"
+            android:inputType="textShortMessage"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/white"
+            android:textColorLink="@color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/location"
-        android:textColor="@android:color/primary_text_light"
+        android:textColor="@android:color/primary_text_dark"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/et_location"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,9 +109,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:autofillHints=""
         android:hint="@string/_123_456_789_zoom"
         android:inputType="text"
+        android:textColor="@android:color/primary_text_dark"
+        android:textColorHint="#DADADA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_location"
         app:layout_constraintTop_toBottomOf="@+id/tv_add_session" />
@@ -114,7 +122,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/date"
-        android:textColor="@android:color/primary_text_light"
+        android:textColor="@android:color/primary_text_dark"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/et_date"
         app:layout_constraintStart_toStartOf="@+id/tv_location"
@@ -124,11 +132,12 @@
         android:id="@+id/et_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:autofillHints=""
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:hint="@string/_16_00"
+        android:hint="dd/MM/yyyy"
         android:inputType="none"
+        android:textColor="@android:color/primary_text_dark"
+        android:textColorHint="#DADADA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/et_location"
         app:layout_constraintTop_toBottomOf="@+id/et_location" />
@@ -138,7 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/time"
-        android:textColor="@android:color/primary_text_light"
+        android:textColor="@android:color/primary_text_dark"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/et_start_time"
         app:layout_constraintStart_toStartOf="@+id/tv_location"
@@ -148,9 +157,10 @@
         android:id="@+id/et_start_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:autofillHints=""
         android:hint="@string/_16_00"
         android:inputType="datetime"
+        android:textColor="@android:color/primary_text_dark"
+        android:textColorHint="#DADADA"
         app:layout_constraintEnd_toStartOf="@+id/et_end_time"
         app:layout_constraintStart_toStartOf="@+id/et_location"
         app:layout_constraintTop_toBottomOf="@id/et_date" />
@@ -159,9 +169,10 @@
         android:id="@+id/et_end_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:autofillHints=""
         android:hint="@string/_17_00"
         android:inputType="datetime"
+        android:textColor="@android:color/primary_text_dark"
+        android:textColorHint="#DADADA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/et_start_time"
         app:layout_constraintTop_toBottomOf="@id/et_date" />
@@ -171,15 +182,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="200dp"
-        android:backgroundTint="@color/white"
         android:background="@color/white"
+        android:backgroundTint="@color/white"
         android:text="@string/submit"
         android:textColor="#de5972"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_subject" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

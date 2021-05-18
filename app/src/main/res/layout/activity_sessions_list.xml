@@ -45,41 +45,32 @@
 
 
     </FrameLayout>
-    <LinearLayout
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_sessions"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:paddingTop="125dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/frameLayout">
 
-        android:layout_marginBottom="50dp"
-        android:orientation="vertical">
-<!--        android:layout_marginLeft="36dp"-->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_sessions"
-            android:layout_width="match_parent"
-            android:layout_height="320dp"
-            android:layout_marginTop="150dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.recyclerview.widget.RecyclerView>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_add_session"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:layout_gravity="right"
-            android:contentDescription="@string/add_session"
-android:layout_marginTop="10dp"
-android:backgroundTint="@color/white"
-            android:tint="@color/white"
-            android:src="@drawable/ic_input_add"/>
-
-<!--        </com.google.android.material.floatingactionbutton.FloatingActionButton>-->
-<!--        app:layout_anchorGravity="bottom|end"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add_session"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:contentDescription="@string/add_session"
+        android:src="@drawable/ic_input_add"
+        android:tint="#DD4848"
+        app:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="#DD4848" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

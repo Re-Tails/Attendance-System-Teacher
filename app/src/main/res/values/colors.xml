@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#48f242</color>
     <color name="red">#f10b59</color>
+    <color name="pink">#de5972</color>
+    <color name="strong_pink">#E63758</color>
     <color name="colorSplashText">#F0F0F0</color>
     <color name="colorBackground">#333C46</color>
 </resources>
