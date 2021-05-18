@@ -44,11 +44,11 @@ public class LoginActivity extends AppCompatActivity {
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         //auto login
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            startActivity(new Intent(LoginActivity.this, SessionListActivity.class));
-            finish();
-        }
+//        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        if (firebaseUser != null) {
+//            startActivity(new Intent(LoginActivity.this, SessionListActivity.class));
+//            finish();
+//        }
 
         setContentView(R.layout.activity_login);
         et_email = findViewById(R.id.email);

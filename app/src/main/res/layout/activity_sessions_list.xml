@@ -15,10 +15,7 @@
 
 
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent">
 
 
         <ImageView
@@ -32,6 +29,7 @@
 
 
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="120dp"
@@ -39,13 +37,34 @@
             android:src="@drawable/hexagone2"
             tools:visibility="visible" />
 
-
-
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Session List"
+            android:textColor="#ffffff"
+            android:textSize="31.3sp"
+            android:layout_marginTop="230dp"
+            android:layout_marginLeft="15dp"
+            />
 
 
     </FrameLayout>
-
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:gravity="center"-->
+<!--        android:paddingTop="125dp"-->
+<!--        android:layout_marginLeft="36dp"-->
+<!--        android:layout_marginBottom="90dp"-->
+<!--        android:orientation="vertical">-->
+    <!--    </LinearLayout>-->
+    <!--    <ImageView-->
+    <!--        android:id="@+id/bookIconImageView"-->
+    <!--        android:layout_width="222dp"-->
+    <!--        android:layout_height="146dp"-->
+    <!--        android:layout_centerInParent="true"-->
+    <!--        android:contentDescription="@null"-->
+    <!--        android:src="@drawable/utswhitelogo" />-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_sessions"
         android:layout_width="match_parent"
