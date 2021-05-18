@@ -17,9 +17,12 @@ import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -69,6 +72,7 @@ public class FacialRecActivity extends AppCompatActivity {
     String currentPhotoPath;
     private ImageView mImageView;
     private ImageButton cameraBtn;
+    ProgressBar progressBar;
     private Button mFaceButton;
     //skip facial recog
     private Button mSkip;
@@ -95,10 +99,13 @@ public class FacialRecActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_facial_rec);
+        progressBar = (ProgressBar)findViewById(R.id.spin_kit);
         done = findViewById(R.id.done);
         mImageView = findViewById(R.id.image_view);
-        mSkip = findViewById(R.id.skip1);
+        mSkip = findViewById(R.id.skip2);
         mSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,8 +191,11 @@ public class FacialRecActivity extends AppCompatActivity {
 
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
+                progressbarworks();
                 f = new File(currentPhotoPath);
                 mImageView.setImageURI(Uri.fromFile(f));
+                mImageView.setClipToOutline(true);
+//                mImageView.setBackgroundColor(Color.parseColor("#FFFFFF"));
                 Log.d("tag", "ABsolute Url of Image is " + Uri.fromFile(f));
 
                 Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
@@ -268,6 +278,12 @@ public class FacialRecActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void progressbarworks() {
+        progressBar.setVisibility(View.VISIBLE);
+done.setVisibility(View.GONE);
+    }
+
     private void uploadImageToFirebase(String name, Uri contentUri) {
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         String UID = fuser.getUid();
@@ -355,6 +371,8 @@ public class FacialRecActivity extends AppCompatActivity {
         new Handler(Looper.getMainLooper()).post(new Runnable(){
             @Override
             public void run() {
+                progressBar.setVisibility(View.GONE);
+                done.setVisibility(View.VISIBLE);
 //                done.setImageDrawable(getResources().getDrawable(R.drawable.avd_done));
         if(recognized){
 done.setImageResource(R.drawable.animated_vector_check);

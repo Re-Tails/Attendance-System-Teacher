@@ -8,24 +8,88 @@
     android:fitsSystemWindows="true"
     tools:context=".SessionListActivity">
 
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+
+        <ImageView
+            android:id="@+id/imghexagon"
+            android:layout_width="140dp"
+            android:layout_height="212dp"
+            android:layout_gravity="right"
+            android:contentDescription=""
+            android:scaleType="fitXY"
+            android:src="@drawable/hexagone1" />
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="120dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/hexagone2"
+            tools:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Session List"
+            android:textColor="#ffffff"
+            android:textSize="31.3sp"
+            android:layout_marginTop="230dp"
+            android:layout_marginLeft="15dp"
+            />
+
+
+    </FrameLayout>
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:gravity="center"-->
+<!--        android:paddingTop="125dp"-->
+<!--        android:layout_marginLeft="36dp"-->
+<!--        android:layout_marginBottom="90dp"-->
+<!--        android:orientation="vertical">-->
+    <!--    </LinearLayout>-->
+    <!--    <ImageView-->
+    <!--        android:id="@+id/bookIconImageView"-->
+    <!--        android:layout_width="222dp"-->
+    <!--        android:layout_height="146dp"-->
+    <!--        android:layout_centerInParent="true"-->
+    <!--        android:contentDescription="@null"-->
+    <!--        android:src="@drawable/utswhitelogo" />-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_sessions"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/frameLayout">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add_session"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_gravity="right"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
         android:contentDescription="@string/add_session"
-        app:layout_anchorGravity="bottom|end"
+        android:src="@drawable/ic_input_add"
+        android:tint="#DD4848"
+        app:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:tint="#DD4848" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,12 @@
 package ses.attendance_system_teacher;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -38,13 +41,14 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         //auto login
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            startActivity(new Intent(LoginActivity.this, SessionListActivity.class));
-            finish();
-        }
+//        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        if (firebaseUser != null) {
+//            startActivity(new Intent(LoginActivity.this, SessionListActivity.class));
+//            finish();
+//        }
 
         setContentView(R.layout.activity_login);
         et_email = findViewById(R.id.email);
@@ -57,9 +61,10 @@ public class LoginActivity extends AppCompatActivity {
         tv_forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+                startActivity(  new Intent(LoginActivity.this, ResetPasswordActivity.class));
             }
         });
+
 
         // login process
         //1. get data from the input fields

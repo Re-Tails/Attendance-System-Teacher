@@ -168,8 +168,7 @@
                     android:id="@+id/fl_login"
                     android:layout_width="40.7dp"
                     android:layout_height="45.3dp"
-
-                    android:layout_gravity="right"
+                        android:layout_gravity="right"
                     android:layout_marginTop="17.3dp"
                     android:background="@drawable/white_hexagone">
                     <!--                    android:layout_gravity="bottom|right"-->
